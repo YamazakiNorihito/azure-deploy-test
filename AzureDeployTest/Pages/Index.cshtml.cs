@@ -8,16 +8,19 @@ namespace AzureDeployTest.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IHttpClientFactory _httpClientFactory = null!;
-
+        private readonly IConfiguration _configuration;
 
 #pragma warning disable CRRSP08 // A misspelled word has been found
         public Todo[]? Todos = Array.Empty<Todo>();
+
+        public string MyConfigData;
 #pragma warning restore CRRSP08 // A misspelled word has been found
 
         public IndexModel(
         IHttpClientFactory httpClientFactory,
-        ILogger<IndexModel> logger) =>
-        (_httpClientFactory, _logger) = (httpClientFactory, logger);
+        ILogger<IndexModel> logger,
+        IConfiguration configuration) =>
+        (_httpClientFactory, _logger, _configuration) = (httpClientFactory, logger, configuration);
 
         public async Task<IActionResult> OnGetAsync(int userId =1)
         {
@@ -30,6 +33,8 @@ namespace AzureDeployTest.Pages
                 Todos = await client.GetFromJsonAsync<Todo[]>(
                     $"https://jsonplaceholder.typicode.com/todos?userId={userId}",
                     new JsonSerializerOptions(JsonSerializerDefaults.Web));
+
+                MyConfigData = _configuration["My:Config:Data"];
             }
             catch (Exception ex)
             {
