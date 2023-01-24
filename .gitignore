@@ -5,7 +5,6 @@
 ### Angular ###
 ## Angular ##
 # compiled output
-dist/
 tmp/
 app/**/*.js
 app/**/*.js.map
@@ -97,4 +96,10 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+
 # End of https://www.toptal.com/developers/gitignore/api/angular,dotnetcore,windows,macos
+
+
+
